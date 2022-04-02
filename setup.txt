@@ -1,0 +1,21 @@
+apt-get -y update
+apt-get -y install ufw nload
+apt-get -y install nginx-extras
+ufw allow 'Nginx HTTP'
+apt-get -y install php7.4-fpm php7.4-curl
+nano /etc/php/7.4/cli/conf.d/10-opcache.ini, add comment ;zend_extension=opcache.so
+nano /etc/php/7.4/cli/php.ini, change output_buffering = 4096 to output_buffering = Off
+
+upload all file,folder of nginx to /etc/nginx
+nano /etc/nginx/conf.d/default.conf, change *.yourdomain.com to domain you want run
+upload all file,folder of home to /home
+upload all file of php to /etc/php/7.4/fpm/php.d
+
+chown -R www-data:www-data /home/*
+service nginx stop
+service php7.4-fpm stop
+service nginx start
+service php7.4-fpm start
+
+
+
